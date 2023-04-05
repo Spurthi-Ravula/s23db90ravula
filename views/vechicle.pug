@@ -1,5 +1,34 @@
 extends layout
 
 block content
+  -
+   let results =[
+      {
+        "vechicle_type": "car",
+        "color": "white",
+        "NoOfTyres": 4
+      },
+      {
+        "vechicle_type": "MotorVechicle",
+        "color": "black",
+        "NoOfTyres": 2
+      },
+      {
+        "vechicle_type": "Bus",
+        "color": "grey",
+        "NoOfTyres": 6
+      },
+      {
+        "vechicle_type": "Truck",
+        "color": "blue",
+        "NoOfTyres": 4
+      }
+    ]
   h1= title
-  
+  .container-fluid 
+    .row 
+      each fishes in results
+        div(class="col-sm-2" onclick=`buy(${results.indexOf(fishes)})`) 
+          each value,key in fishes  
+            = " " +value
+
