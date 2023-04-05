@@ -8,5 +8,5 @@ Vechicle Class Selected
 |-----------------|--------|
 | vechicle_type | String |
 | color | String |
-| NoOfTyres | Number |
+| no_of_tyres | Number |
 

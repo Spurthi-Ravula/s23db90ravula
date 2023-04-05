@@ -6,29 +6,35 @@ block content
       {
         "vechicle_type": "car",
         "color": "white",
-        "NoOfTyres": 4
+        "no_of_tyres": 4
       },
       {
         "vechicle_type": "MotorVechicle",
         "color": "black",
-        "NoOfTyres": 2
+        "no_of_tyres": 2
       },
       {
         "vechicle_type": "Bus",
         "color": "grey",
-        "NoOfTyres": 6
+        "no_of_tyres": 6
       },
       {
         "vechicle_type": "Truck",
         "color": "blue",
-        "NoOfTyres": 4
+        "no_of_tyres": 4
+      },
+       {
+        "vechicle_type": "Auto Rickshaw",
+        "color": "yellow",
+        "no_of_tyres": 3
       }
+
     ]
   h1= title
   .container-fluid 
     .row 
-      each fishes in results
-        div(class="col-sm-2" onclick=`buy(${results.indexOf(fishes)})`) 
-          each value,key in fishes  
+      each vechicle in results
+        div(class="col-sm-2" onclick=`buy(${results.indexOf(vechicle)})`) 
+          each value,key in vechicle  
             = " " +value
 
