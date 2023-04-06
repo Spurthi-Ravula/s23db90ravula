@@ -28,7 +28,6 @@ block content
         "color": "yellow",
         "no_of_tyres": 3
       }
-
     ]
   h1= title
   .container-fluid 
@@ -37,4 +36,7 @@ block content
         div(class="col-sm-2" onclick=`buy(${results.indexOf(vechicle)})`) 
           each value,key in vechicle  
             = " " +value
-
+  script.
+    function buy(index){
+      alert("You purchased item "+index)
+    }
