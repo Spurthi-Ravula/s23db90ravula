@@ -19,3 +19,16 @@ res.send('NOT IMPLEMENTED: Vechicle delete DELETE ' + req.params.id);
 exports.vechicle_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: Vechicles update PUT' + req.params.id);
 };
+
+// List of all Vechicles
+exports.vechicle_list = async function(req, res) {
+    try{
+    theVechicles = await Vechicle.find();
+    res.send(theVechicles);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
+    
