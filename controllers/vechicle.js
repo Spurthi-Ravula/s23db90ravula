@@ -31,4 +31,39 @@ exports.vechicle_list = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+
+// VIEWS
+// Handle a show all view
+exports.vechicle_view_all_Page = async function(req, res) {
+    try{
+        theVechicles = await Vechicle.find();
+    res.render('vechicle', { title: 'Vechicle Search Results', results: theVechicles });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
+    
+// Handle Vechicle create on POST.
+exports.vechicle_create_post = async function(req, res) {
+    console.log(req.body)
+    let document = new Vechicle();
+    // We are looking for a body, since POST does not have query parameters.
+    // Even though bodies can be in many different formats, we will be picky
+    // and require that it be a json object
+    // {"costume_type":"goat", "cost":12, "size":"large"}
+    document.vechicle_type = req.body.vechicle_type;
+    document.color = req.body.color;
+    document.no_of_tyres = req.body.no_of_tyres;
+    try{
+    let result = await document.save();
+    res.send(result);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
+     
     

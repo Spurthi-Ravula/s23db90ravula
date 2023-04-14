@@ -1,9 +1,10 @@
 var express = require('express');
+const vechicle_controlers= require('../controllers/vechicle');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('vechicle', { title: 'Search Results Vechicle' });
-});
-
+/* GET vechicles */
+router.get('/', vechicle_controlers.vechicle_view_all_Page);
 module.exports = router;
+
+
+

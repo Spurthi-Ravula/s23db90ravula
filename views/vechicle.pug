@@ -1,41 +1,18 @@
 extends layout
 
 block content
-  -
-   let results =[
-      {
-        "vechicle_type": "car",
-        "color": "white",
-        "no_of_tyres": 4
-      },
-      {
-        "vechicle_type": "MotorVechicle",
-        "color": "black",
-        "no_of_tyres": 2
-      },
-      {
-        "vechicle_type": "Bus",
-        "color": "grey",
-        "no_of_tyres": 6
-      },
-      {
-        "vechicle_type": "Truck",
-        "color": "blue",
-        "no_of_tyres": 4
-      },
-       {
-        "vechicle_type": "Auto Rickshaw",
-        "color": "yellow",
-        "no_of_tyres": 3
-      }
-    ]
+  - let items = results
   h1= title
   .container-fluid 
     .row 
-      each vechicle in results
-        div(class="col-sm-2" onclick=`buy(${results.indexOf(vechicle)})`) 
-          each value,key in vechicle  
-            = " " +value
+      each cin in items
+        div(class="col-sm-2" style=`border:solid 2px black` onclick=`buy(${items.indexOf(cin)})`) 
+          p.
+           vechicle_type -  #{cin.vechicle_type}
+          p.
+           color -  #{cin.color}
+          p.
+           no_of_tyres  -  #{cin.no_of_tyres}
   script.
     function buy(index){
       alert("You purchased item "+index)
