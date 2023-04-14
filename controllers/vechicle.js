@@ -1,52 +1,75 @@
 var Vechicle = require('../models/vechicle');
 // List of all Vechicles
-exports.vechicle_list = function(req, res) {
-res.send('NOT IMPLEMENTED: Vechicle list');
+exports.vechicle_list = function (req, res) {
+    res.send('NOT IMPLEMENTED: Vechicle list');
 };
-// for a specific Vechicle.
-exports.vechicle_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Vechicle detail: ' + req.params.id);
+// for a specific vechicle. 
+exports.vechicle_detail = async function (req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await Vechicle.findById(req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
 };
-// Handle Vechicle create on POST.
-exports.vechicle_create_post = function(req, res) {
-res.send('NOT IMPLEMENTED: Vechicle create POST');
-};
+// // Handle Vechicle create on POST.
+// exports.vechicle_create_post = function(req, res) {
+// res.send('NOT IMPLEMENTED: Vechicle create POST');
+// };
 // Handle Vechicle delete form on DELETE.
-exports.vechicle_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: Vechicle delete DELETE ' + req.params.id);
+exports.vechicle_delete = function (req, res) {
+    res.send('NOT IMPLEMENTED: Vechicle delete DELETE ' + req.params.id);
 };
-// Handle Vechicle update form on PUT.
-exports.vechicle_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: Vechicles update PUT' + req.params.id);
+// Handle vechicle update form on PUT. 
+exports.vechicle_update_put = async function(req, res) { 
+    console.log(`update on id ${req.params.id} with body 
+${JSON.stringify(req.body)}`) 
+    try { 
+        let toUpdate = await Vechicle.findById( req.params.id) 
+        // Do updates of properties 
+        if(req.body.vechicle_type)  
+               toUpdate.vechicle_type = req.body.vechicle_type; 
+        if(req.body.color) toUpdate.color = req.body.color; 
+        if(req.body.no_of_tyres) toUpdate.no_of_tyres = req.body.no_of_tyres; 
+        let result = await toUpdate.save(); 
+        console.log("Sucess " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`); 
+    } 
 };
 
 // List of all Vechicles
-exports.vechicle_list = async function(req, res) {
-    try{
-    theVechicles = await Vechicle.find();
-    res.send(theVechicles);
+exports.vechicle_list = async function (req, res) {
+    try {
+        theVechicles = await Vechicle.find();
+        res.send(theVechicles);
     }
-    catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     }
-    };
+};
 
 // VIEWS
 // Handle a show all view
-exports.vechicle_view_all_Page = async function(req, res) {
-    try{
+exports.vechicle_view_all_Page = async function (req, res) {
+    try {
         theVechicles = await Vechicle.find();
-    res.render('vechicle', { title: 'Vechicle Search Results', results: theVechicles });
+        res.render('vechicle', { title: 'Vechicle Search Results', results: theVechicles });
     }
-    catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     }
-    };
-    
+};
+
 // Handle Vechicle create on POST.
-exports.vechicle_create_post = async function(req, res) {
+exports.vechicle_create_post = async function (req, res) {
     console.log(req.body)
     let document = new Vechicle();
     // We are looking for a body, since POST does not have query parameters.
@@ -56,14 +79,16 @@ exports.vechicle_create_post = async function(req, res) {
     document.vechicle_type = req.body.vechicle_type;
     document.color = req.body.color;
     document.no_of_tyres = req.body.no_of_tyres;
-    try{
-    let result = await document.save();
-    res.send(result);
+    try {
+        let result = await document.save();
+        res.send(result);
     }
-    catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     }
-    };
-     
-    
+};
+
+
+
+
