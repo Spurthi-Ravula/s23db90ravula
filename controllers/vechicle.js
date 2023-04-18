@@ -19,9 +19,17 @@ exports.vechicle_detail = async function (req, res) {
 // res.send('NOT IMPLEMENTED: Vechicle create POST');
 // };
 // Handle Vechicle delete form on DELETE.
-exports.vechicle_delete = function (req, res) {
-    res.send('NOT IMPLEMENTED: Vechicle delete DELETE ' + req.params.id);
-};
+exports.vechicle_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Vechicle.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
 // Handle vechicle update form on PUT. 
 exports.vechicle_update_put = async function(req, res) { 
     console.log(`update on id ${req.params.id} with body 
