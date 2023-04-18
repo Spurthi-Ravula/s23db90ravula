@@ -19,36 +19,36 @@ exports.vechicle_detail = async function (req, res) {
 // res.send('NOT IMPLEMENTED: Vechicle create POST');
 // };
 // Handle Vechicle delete form on DELETE.
-exports.vechicle_delete = async function(req, res) {
+exports.vechicle_delete = async function (req, res) {
     console.log("delete " + req.params.id)
     try {
-    result = await Vechicle.findByIdAndDelete( req.params.id)
-    console.log("Removed " + result)
-    res.send(result)
+        result = await Vechicle.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
     } catch (err) {
-    res.status(500)
-    res.send(`{"error": Error deleting ${err}}`);
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
     }
-   };
+};
 // Handle vechicle update form on PUT. 
-exports.vechicle_update_put = async function(req, res) { 
+exports.vechicle_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body 
-${JSON.stringify(req.body)}`) 
-    try { 
-        let toUpdate = await Vechicle.findById( req.params.id) 
+${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await Vechicle.findById(req.params.id)
         // Do updates of properties 
-        if(req.body.vechicle_type)  
-               toUpdate.vechicle_type = req.body.vechicle_type; 
-        if(req.body.color) toUpdate.color = req.body.color; 
-        if(req.body.no_of_tyres) toUpdate.no_of_tyres = req.body.no_of_tyres; 
-        let result = await toUpdate.save(); 
-        console.log("Sucess " + result) 
-        res.send(result) 
-    } catch (err) { 
-        res.status(500) 
+        if (req.body.vechicle_type)
+            toUpdate.vechicle_type = req.body.vechicle_type;
+        if (req.body.color) toUpdate.color = req.body.color;
+        if (req.body.no_of_tyres) toUpdate.no_of_tyres = req.body.no_of_tyres;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
         res.send(`{"error": ${err}: Update for id ${req.params.id} 
-failed`); 
-    } 
+failed`);
+    }
 };
 
 // List of all Vechicles
@@ -98,32 +98,46 @@ exports.vechicle_create_post = async function (req, res) {
 };
 
 // Handle a show one view with id specified by query
-exports.vechicle_view_one_Page = async function(req, res) {
+exports.vechicle_view_one_Page = async function (req, res) {
     console.log("single view for id " + req.query.id)
-    try{
-    result = await Vechicle.findById( req.query.id)
-    res.render('vechicledetail',
-   { title: 'Vechicle Detail', toShow: result });
+    try {
+        result = await Vechicle.findById(req.query.id)
+        res.render('vechicledetail',
+            { title: 'Vechicle Detail', toShow: result });
     }
-    catch(err){
-    res.status(500)
-    res.send(`{'error': '${err}'}`);
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
     }
-   };
+};
 
-// Handle building the view for creating a costume.
+// Handle building the view for creating a vechicle.
 // No body, no in path parameter, no query.
 // Does not need to be async
-exports.vechicle_create_Page = function(req, res) {
+exports.vechicle_create_Page = function (req, res) {
     console.log("create view")
-    try{
-    res.render('vechiclecreate', { title: 'Vechicle Create'});
+    try {
+        res.render('vechiclecreate', { title: 'Vechicle Create' });
     }
-    catch(err){
-    res.status(500)
-    res.send(`{'error': '${err}'}`);
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
     }
-   };
+};
+
+// Handle building the view for updating a vechicle.
+// query provides the id
+exports.vechicle_update_Page = async function (req, res) {
+    console.log("update view for item " + req.query.id)
+    try {
+        let result = await Vechicle.findById(req.query.id)
+        res.render('vechicleupdate', { title: 'Vechicle Update', toShow: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
 
 
 

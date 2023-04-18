@@ -11,6 +11,10 @@ router.get('/detail', vechicle_controlers.vechicle_view_one_Page);
 /* GET create costume page */
 router.get('/create', vechicle_controlers.vechicle_create_Page);
 
+/* GET create update page */
+router.get('/update', vechicle_controlers.vechicle_update_Page);
+
+
 module.exports = router;
 
 
