@@ -17,6 +17,8 @@ router.put('/vechicles/:id', vechicle_controller.vechicle_update_put);
 router.get('/vechicles/:id', vechicle_controller.vechicle_detail);
 // GET request for list of all Vechicle items.
 router.get('/vechicles', vechicle_controller.vechicle_list);
+
+
 module.exports = router;
 // API for our resources
 exports.api = function(req, res) {
