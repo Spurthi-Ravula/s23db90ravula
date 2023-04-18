@@ -1,0 +1,53 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let vechicleid = toShow._id 
+    - let vechicle_type = toShow.vechicle_type
+    - let color  = toShow.color 
+    - let no_of_tyres = toShow.no_of_tyres
+    - let actionid = "/resource/vechicles/" + vechicleid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='vechicleAttr mr-3') vechicle  ID is: 
+        div #{vechicleid} 
+      div.row 
+        div(class='vechicleAttr mr-3') vechicle type is: 
+        div #{vechicle_type} 
+      div.row 
+        div(class='vechicleAttr mr-3') vechicle color is: 
+        div #{color} 
+      div.row 
+        div(class='vechicleAttr mr-3') no_of_tyres is: 
+        div #{no_of_tyres} 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the vechicle collection 
+      window.location.href='/vechicle' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'      
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/vechicle' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 
