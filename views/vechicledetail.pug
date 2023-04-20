@@ -1,20 +1,25 @@
-extends layout
-block content
- h1= title
- - let vechicleid = toShow._id
- - let vechicle_type = toShow.vechicle_type
- - let vechiclecolor = toShow.color
- - let no_of_tyres = toShow.no_of_tyres
- div
- div.row
- div(class='vechicleAttr mr-3') Vechicle ID is:
- div #{vechicleid}
- div.row
- div(class='vechicleAttr mr-3') Vechicle Type is:
- div #{vechicle_type}
- div.row
- div(class='vechicleAttr mr-3') Vechicle color is:
- div #{vechiclecolor}
- div.row
- div(class='vechicleAttr mr-3') No_of_tyres is:
- div #{no_of_tyres}
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+   if (toShow == null) 
+      h2 No instance to detail 
+   else
+  - let vechiclesid = toShow._id 
+  - let vechicle_type = toShow.vechicle_type 
+  - let color = toShow.color 
+  - let no_of_tyres = toShow.no_of_tyres 
+  div 
+    div.row 
+      div(class='vechicleAttr mr-3') vechicles ID is: 
+      div #{vechiclesid} 
+    div.row 
+      div(class='vechicleAttr mr-3') vechicles Type is: 
+      div #{vechicle_type} 
+    div.row 
+      div(class='vechicleAttr mr-3') vechicles color is: 
+      div #{color} 
+    div.row 
+      div(class='vechicleAttr mr-3') vechicles no_of_tyres: 
+      div #{no_of_tyres} 
