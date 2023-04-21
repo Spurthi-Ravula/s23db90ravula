@@ -5,9 +5,9 @@ block content
   h1= title
   div(class="container-fluid")
   div(class="row m-1")
-    each vechicle,index in vechicles
+    each vechicle in vechicles
       - let destination = `dispatch(\"/vechicle/update?id=${vechicle._id}\")`
-      div(class="row-sm-2", class="m-1") #{vechicle.vechicle_type} - #{vechicle.color} - #{vechicle.no_of_tyres}
+      div(class="row-sm-2", class="m-1") vechicle #{vechicle.vechicle_type} (#{vechicle.color}) is #{vechicle.no_of_tyres}
         button.btn( class="btn-primary ml-1", onclick= destination) Update
 
   script.
